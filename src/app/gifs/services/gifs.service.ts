@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class GifsService {
-
+  private apiKey: string = 'qBDboQvMFViShZQ71t43CvOQG6kW77Sa';
   private _historial: string[] = [];
 
 
@@ -13,7 +13,12 @@ export class GifsService {
   }
 
   buscarGifs( query: string) {
-    this._historial.unshift( query );
+      query = query.trim().toLowerCase();
+    if( !this._historial.includes( query )) {
+      this._historial.unshift( query );
+      this._historial = this._historial.slice(0, 9);
+    }
+
     console.log(this._historial);
   }
 }
